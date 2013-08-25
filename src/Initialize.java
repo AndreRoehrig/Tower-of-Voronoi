@@ -25,7 +25,7 @@ public class Initialize {
     private int						width						= 600;
 
     /** The height of the game display area */
-    private int						height						= 600;
+    private int						height						= 700;
 
 
 

@@ -17,9 +17,10 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class Main {
 
+
     public static void main(String[] args){
         try {
-            Display.setDisplayMode(new DisplayMode(600, 600));
+            Display.setDisplayMode(new DisplayMode(600, 700));
         } catch (LWJGLException e) {
             e.printStackTrace();
         }
@@ -28,7 +29,7 @@ public class Main {
         Display.sync(60);
         Screen renderfunc = new Screen();
 
-        while (true) {
+        while (renderfunc.gamerunning) {
             renderfunc.render();
         }
     }

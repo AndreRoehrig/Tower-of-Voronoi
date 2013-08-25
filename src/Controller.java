@@ -1,5 +1,7 @@
 import org.lwjgl.input.Keyboard;
 
+import static org.lwjgl.opengl.GL11.*;
+
 /**
  * Created with IntelliJ IDEA.
  * User: andre
@@ -8,6 +10,8 @@ import org.lwjgl.input.Keyboard;
  * To change this template use File | Settings | File Templates.
  */
 public class Controller {
+    boolean gamerunning = true;
+
     Player player1 = new Player(0);
     Player player2 = new Player(1);
 
@@ -57,6 +61,50 @@ public class Controller {
 
             }
 
+        }
+    }
+
+    public double euclideandist(int x1,int y1,int x2, int y2){
+        double sum = 0;
+        sum += Math.pow((x1-x2),2);
+        sum += Math.pow((y1-y2),2);
+        sum = Math.sqrt(sum);
+        return sum;
+    }
+
+    public int nearestdistance(int x, int y){
+        double eucl_p2;
+        double eucl_p1;
+
+
+        double eucl_p1_1 = euclideandist(player1.x1,player1.y1,x,y);
+        double eucl_p1_2 = euclideandist(player1.x2,player1.y2,x,y);
+        double eucl_p2_1 = euclideandist(player2.x1,player2.y1,x,y);
+        double eucl_p2_2 = euclideandist(player2.x2,player2.y2,x,y);
+
+        if(eucl_p1_1 <= eucl_p1_2){
+            eucl_p1 = eucl_p1_1;
+        }
+        else{
+            eucl_p1 = eucl_p1_2;
+        }
+
+        if(eucl_p2_1 <= eucl_p2_2){
+            eucl_p2 = eucl_p2_1;
+        }
+        else{
+            eucl_p2 = eucl_p2_2;
+        }
+
+        if(eucl_p1 < eucl_p2){
+            return 1;
+        }
+
+        else if(eucl_p2 < eucl_p1){
+            return 2;
+        }
+        else{
+            return 0;
         }
     }
 }

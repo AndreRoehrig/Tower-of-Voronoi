@@ -12,6 +12,8 @@ public class Player {
     int x2 = -1;
     int y2 = -1;
 
+    int pixels = 0;
+
     boolean leftkey = false;
 
     int pointsleft = 2;
