@@ -22,10 +22,10 @@ public class Initialize {
     private String				WINDOW_TITLE					= "Tower of Voronoi";
 
     /** The width of the game display area */
-    private int						width						= 800;
+    private int						width						= 600;
 
     /** The height of the game display area */
-    private int						height						= 800;
+    private int						height						= 600;
 
 
 

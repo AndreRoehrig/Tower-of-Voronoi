@@ -19,7 +19,7 @@ public class Main {
 
     public static void main(String[] args){
         try {
-            Display.setDisplayMode(new DisplayMode(800, 800));
+            Display.setDisplayMode(new DisplayMode(600, 600));
         } catch (LWJGLException e) {
             e.printStackTrace();
         }
