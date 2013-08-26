@@ -23,8 +23,17 @@ import static org.lwjgl.opengl.GL11.glLoadIdentity;
 public class Screen {
     boolean gamerunning = true;
 
+    int check = 0;
+
+
+
     private int FRAMERATE = 60;
     Controller controller = new Controller();
+
+    Picture picture = new Picture();
+
+
+
 
     public void drawline(int lineheight){
         glColor3f(255, 0, 0);
@@ -87,7 +96,16 @@ public class Screen {
         Display.sync(FRAMERATE);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        if (controller.frame < 610){
+        if(Keyboard.isKeyDown(Keyboard.KEY_N)){
+            check = 1;
+        }
+
+        if (check == 0){
+            picture.render_title();
+        }
+
+
+        if (controller.frame < 610 && check == 1){
 
             drawline(controller.lineheight);
 
@@ -105,16 +123,74 @@ public class Screen {
                 controller.player2.leftkey = true;
             }
 
+
+            picture.render();
+
+            if (controller.player1.pointsleft == 2){
+                glColor3f(0, 255, 0);
+                glBegin(GL_QUADS);
+                glVertex2f(110,650);
+                glVertex2f(160,650);
+                glVertex2f(160,600);
+                glVertex2f(110,600);
+                glEnd();
+            }
+
+            if (controller.player1.pointsleft >= 1){
+                glColor3f(0, 255, 0);
+                glBegin(GL_QUADS);
+                glVertex2f(180,650);
+                glVertex2f(230,650);
+                glVertex2f(230,600);
+                glVertex2f(180,600);
+                glEnd();
+            }
+
+            if (controller.player2.pointsleft == 2){
+                glColor3f(0, 0, 255);
+                glBegin(GL_QUADS);
+                glVertex2f(450,650);
+                glVertex2f(500,650);
+                glVertex2f(500,600);
+                glVertex2f(450,600);
+                glEnd();
+            }
+
+            if (controller.player2.pointsleft >= 1){
+                glColor3f(0, 0, 255);
+                glBegin(GL_QUADS);
+                glVertex2f(520,650);
+                glVertex2f(570,650);
+                glVertex2f(570,600);
+                glVertex2f(520,600);
+                glEnd();
+            }
+
+            glColor3f(0, 0, 0);
+            glBegin(GL_QUADS);
+            glVertex2f(0,670);
+            glVertex2f(600 - controller.frame,670);
+            glVertex2f(600 -controller.frame,660);
+            glVertex2f(0,660);
+            glEnd();
+
             controller.controls();
             controller.frame += 1;
             controller.cursor += 10;
             controller.resetlineheight();
             controller.resetcursor();
 
+
+        }
+        if (controller.frame < 610){
             Display.update();
         }
+
         int res_x;
         int res_y;
+
+
+
         if (controller.frame == 610){
             for(res_x = 0; res_x <= 600;  res_x++)
             {
@@ -123,9 +199,31 @@ public class Screen {
                     drawresultpoint(res_x,res_y);
                 }
             }
+        if (controller.player1.pixels > controller.player2.pixels){
+            picture.render_p1();
+        }
 
-            Display.update();
+        else if (controller.player1.pixels < controller.player2.pixels){
+            picture.render_p2();
+        }
 
+        else{
+            picture.render_draw();
+        }
+
+
+
+        Display.update();
+
+        if(Keyboard.isKeyDown(Keyboard.KEY_N)){
+            controller.frame = 0;
+            controller.player1 = new Player(0);
+            controller.player2 = new Player(1);
+                }
+
+        if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)){
+            System.exit(0);
+        }
         }
     }
 

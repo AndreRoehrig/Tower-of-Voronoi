@@ -7,10 +7,10 @@
  */
 public class Player {
     int color = 0;
-    int x1 = -1;
-    int y1 = -1;
-    int x2 = -1;
-    int y2 = -1;
+    int x1 = -1000;
+    int y1 = -1000;
+    int x2 = -1000;
+    int y2 = -1000;
 
     int pixels = 0;
 

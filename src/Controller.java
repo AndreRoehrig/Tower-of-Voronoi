@@ -10,7 +10,7 @@ import static org.lwjgl.opengl.GL11.*;
  * To change this template use File | Settings | File Templates.
  */
 public class Controller {
-    boolean gamerunning = true;
+
 
     Player player1 = new Player(0);
     Player player2 = new Player(1);

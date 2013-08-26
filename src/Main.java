@@ -28,8 +28,11 @@ public class Main {
         init.initialize();
         Display.sync(60);
         Screen renderfunc = new Screen();
-
-        while (renderfunc.gamerunning) {
+        renderfunc.picture.init();
+        Sound music = new Sound();
+        music.init();
+        music.music.playAsMusic(1.0f, 1.0f, true);
+        while (true) {
             renderfunc.render();
         }
     }
